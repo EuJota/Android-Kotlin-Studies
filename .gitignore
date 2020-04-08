@@ -1,6 +1,5 @@
-
-# Created by https://www.gitignore.io/api/kotlin,android,androidstudio
-# Edit at https://www.gitignore.io/?templates=kotlin,android,androidstudio
+# Created by https://www.gitignore.io/api/kotlin,android,firebase,androidstudio
+# Edit at https://www.gitignore.io/?templates=kotlin,android,firebase,androidstudio
 
 ### Android ###
 # Built application files
@@ -93,6 +92,15 @@ output.json
 # Replacement of .externalNativeBuild directories introduced
 # with Android Studio 3.5.
 .cxx/
+
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
 
 ### Kotlin ###
 # Compiled class file
@@ -221,4 +229,4 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 
-# End of https://www.gitignore.io/api/kotlin,android,androidstudio
+# End of https://www.gitignore.io/api/kotlin,android,firebase,androidstudio
