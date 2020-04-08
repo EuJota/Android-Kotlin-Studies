@@ -6,47 +6,62 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import com.example.firestorepeople.Adapters.MyFragmentPagerAdapter
 import com.example.firestorepeople.Fragments.FirstFragment
+import com.example.firestorepeople.Fragments.MyFragment
 import com.example.firestorepeople.Fragments.SecondFragment
 import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.tabs.TabLayout
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var viewPager: ViewPager
+    lateinit var tabs: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        initViews()
 
-        bottom_navigation_view.setOnNavigationItemSelectedListener{
-            when(it.itemId){
-                R.id.navigation_home ->{
-                    title = "Pessoas"    //resources.getString("Favoritos")
-                    loadFragment(FirstFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.navigation_dashboard ->{
-                    title = "Favoritos"    //resources.getString("Favoritos")
-                    loadFragment(SecondFragment())
-                    return@setOnNavigationItemSelectedListener true
-                }
-            }
-            false
-        }
+        initTabLayout()
 
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
-//        }
+        setupViewPager()
     }
 
-    private fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    private fun setupViewPager() {
+
+        val adapter = MyFragmentPagerAdapter(this, supportFragmentManager, tabs.tabCount)
+        viewPager.adapter = adapter
+
+        viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                viewPager.currentItem = tab!!.position
+            }
+
+        })
+    }
+
+    private fun initViews() {
+        tabs = findViewById(R.id.tablayout)
+        viewPager = findViewById(R.id.view_pager_container)
+    }
+
+    private fun initTabLayout(){
+        tabs.addTab(tabs.newTab().setText("Pessoas"))
+        tabs.addTab(tabs.newTab().setText("Favoritos"))
     }
 
 

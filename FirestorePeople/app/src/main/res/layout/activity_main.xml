@@ -22,21 +22,19 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav_menu"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="40dp"
+        app:tabGravity="fill"
+        android:layout_below="@id/toolbar_container"
+        android:background="#0d98a7"/>
 
-    <FrameLayout
-        android:id="@+id/container"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar_container"
-        android:layout_above="@+id/bottom_navigation_view"
-        app:layout_behavior = "@string/appbar_scrolling_view_behavior"/>
+        android:layout_below="@id/tablayout"/>
 
 
 </RelativeLayout>
