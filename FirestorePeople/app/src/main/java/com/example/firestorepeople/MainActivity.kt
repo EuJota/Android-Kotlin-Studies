@@ -23,12 +23,12 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation_view.setOnNavigationItemSelectedListener{
             when(it.itemId){
                 R.id.navigation_home ->{
-                    title = "Pessoas"    //resources.getString("Favoritos")
+                    //resources.getString("Favoritos")
                     loadFragment(FirstFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_dashboard ->{
-                    title = "Favoritos"    //resources.getString("Favoritos")
+                    //resources.getString("Favoritos")
                     loadFragment(SecondFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
-//        }
+        fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+        }
     }
 
     private fun loadFragment(fragment: Fragment){
