@@ -3,10 +3,9 @@ package com.example.firestorepeople.Fragments
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firestorepeople.Adapters.UserAdapter
@@ -35,9 +34,8 @@ class FirstFragment : Fragment() {
         return view
     }
 
-    fun readUsers(){
+    fun  readUsers(){
         val userList = mutableListOf<User>()
-
 
         val db = FirebaseFirestore.getInstance()
 
@@ -56,12 +54,34 @@ class FirstFragment : Fragment() {
                     //userList.add(User(doc.id, doc.get("nome").toString(), doc.get("idade").toString().toInt())) - FUNCIONANDO
                 }
 
-                userAdapter = UserAdapter(userList, context!!)
+                userAdapter = UserAdapter(userList)
                 recyclerView.adapter = userAdapter
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents.", exception)
             }
+    }
+
+    //PRECISA CORRIGIR O SEARCH QUE TA BUGADO (O BOTAO)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        val searchItem = menu.findItem(R.id.action_settings)
+
+        if (searchItem != null){
+            val searchView = searchItem.actionView as SearchView
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    userAdapter.filter.filter(newText)
+                    return true
+                }
+
+            })
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

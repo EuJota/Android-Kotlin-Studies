@@ -7,6 +7,12 @@
     tools:context=".Fragments.FirstFragment"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/progress_circular"
+        android:layout_gravity="center_horizontal|center_vertical"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_users"
         android:layout_width="match_parent"

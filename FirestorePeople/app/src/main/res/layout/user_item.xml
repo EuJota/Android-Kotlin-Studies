@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/pic"
         android:layout_width="40dp"
-        android:layout_height="40dp"/>
+        android:layout_height="40dp"
+        android:src="@mipmap/ic_launcher"/>
 
     <LinearLayout
         android:layout_toEndOf="@id/pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        >
         <TextView
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
@@ -23,6 +27,14 @@
             android:layout_height="wrap_content"
             android:text="Age"/>
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_fav_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_favorite_border"
+        android:backgroundTint="#fff"/>
 
 
 

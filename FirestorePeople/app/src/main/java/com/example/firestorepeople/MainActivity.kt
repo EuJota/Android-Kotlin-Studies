@@ -1,10 +1,12 @@
 package com.example.firestorepeople
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.example.firestorepeople.Fragments.FirstFragment
 import com.example.firestorepeople.Fragments.SecondFragment
@@ -19,6 +21,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+
+        loadFragment(FirstFragment())
+
+        //PRECISA SETAR UM FRAGMENT COMO DEFAULT PORQUE NAO TA CARREGANDO DE INICIO NO APP
 
         bottom_navigation_view.setOnNavigationItemSelectedListener{
             when(it.itemId){
@@ -36,9 +42,9 @@ class MainActivity : AppCompatActivity() {
             false
         }
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        fab.setOnClickListener {
+            val intent = Intent(this, CadastrarActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -51,7 +57,6 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 

@@ -5,8 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
+import com.example.firestorepeople.Persistence.DataPersistence
 import com.example.firestorepeople.R
 
 class SecondFragment : Fragment() {
@@ -21,5 +20,7 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        DataPersistence.showFavoritePerson(context)
+        println(DataPersistence.showFavoritePerson(context))
     }
 }
