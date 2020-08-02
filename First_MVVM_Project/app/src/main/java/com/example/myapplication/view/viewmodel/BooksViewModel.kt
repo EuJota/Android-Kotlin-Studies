@@ -2,7 +2,12 @@ package com.example.myapplication.view.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.data.NYTServices.ApiService
 import com.example.myapplication.data.model.Book
+import com.example.myapplication.data.response.BookBodyResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // CLASSE PRECISA SER INDEPENDENTE DAS ACTIVITIES OU FRAGMENTS
 
@@ -14,14 +19,35 @@ class BooksViewModel : ViewModel() {
     val booksLiveData : MutableLiveData<List<Book>> = MutableLiveData()
 
     fun getBooks() {
-        booksLiveData.value = createFakeBooks()
-    }
+        ApiService.service.getBooks().enqueue(
+            object: Callback<BookBodyResponse>{
+                override fun onFailure(call: Call<BookBodyResponse>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
 
-    fun createFakeBooks() : List<Book>{
-        return listOf(
-            Book("Title","Autor 1"),
-            Book("Title 2","Autor 2"),
-            Book("Title 3","Autor 3")
+                override fun onResponse(
+                    call: Call<BookBodyResponse>,
+                    response: Response<BookBodyResponse>
+                ) {
+                    if(response.isSuccessful){
+                        val books : MutableList<Book> = mutableListOf()
+
+                        response.body()?.let {bookBodyResponse ->
+                            for(result in bookBodyResponse.bookResuls) {
+                                val book = Book(
+                                    title = result.bookDetailsResponse[0].title,
+                                    author = result.bookDetailsResponse[0].author
+                                )
+
+                                books.add(book)
+                            }
+                        }
+
+                        booksLiveData.value = books
+                    }
+                }
+
+            }
         )
     }
 }
